@@ -1,1 +1,102 @@
-# Splunk-SSH-Log-Analysis
+# 🛡️ Splunk SSH Log Analyzer  
+
+This project demonstrates how a SOC Analyst uses Splunk to analyze **SSH authentication logs** for detecting suspicious activities such as failed logins, brute-force attempts, successful logins from unusual locations, and unauthenticated SSH connections. You’ll learn how to ingest JSON log data, extract key fields, run detection queries, visualize login trends, and configure alerts for high-risk behavior. The project includes step-by-step tasks for identifying failed attempts, multiple failed authentications, suspicious source IPs, and scanning-like behavior. This hands-on lab strengthens core SIEM skills and provides practical experience in threat detection, log analysis, and building dashboards in Splunk.
+---
+
+## 🎯 Objective  
+Detect and analyze **SSH authentication** activity to identify brute-force attempts, suspicious logins, and anomalous access patterns using Splunk.
+---
+
+## 🧩 Lab Setup  
+- **Tool:** Splunk Enterprise  
+- **Dataset:** `ssh.log`  
+- **Host:** `kali`  
+- **Sourcetype:** `syslog`  
+
+---
+
+## ⚙️ Task 1: Searching SSH Events  
+
+### 🕵️ Retrieve all SSH logs  
+```spl
+source="ssh.log" host="kali" sourcetype="syslog"
+```
+
+---
+
+## 📊 Task 2: SSH Activity Analysis  
+
+### 🔹 Identify Top Source IPs  
+```spl
+source="ssh.log" host="kali" sourcetype="syslog"
+| top limit=10 src_ip
+```
+
+### 🔹 Successful vs Failed Login Attempts  
+```spl
+source="ssh.log" host="kali" sourcetype="syslog"
+| stats count by info
+```
+
+---
+
+## ⚠️ Task 3: Anomaly Detection  
+
+### 🔹 Detect Unusual Login Spikes  
+```spl
+source="ssh.log" host="kali" sourcetype="syslog"
+| timechart span=1h count
+```
+
+### 🔹 Search for Failed Login Attempts  
+```spl
+source="ssh.log" host="kali" sourcetype="syslog"
+| search info="failure"
+```
+
+### 🔹 Investigate Suspicious IP Addresses  
+```spl
+source="ssh.log" host="kali" sourcetype="syslog"
+| search src_ip="192.168.202.109"
+```
+
+---
+
+## 👨‍💻 Task 4: Monitoring User Behavior  
+
+### 🔹 Identify Users with Multiple Failed Logins  
+```spl
+source="ssh.log" host="kali" sourcetype="syslog"
+| search info="failure"
+| stats count by src_ip
+```
+
+---
+
+## 🖼 Dashboard Screenshots  
+
+<img width="1920" height="1020" alt="Screenshot 2025-11-02 190203" src="https://github.com/user-attachments/assets/ba81c651-1472-4ff1-bab6-bfa8367c4f7d" />
+<img width="1920" height="1020" alt="Screenshot 2025-11-02 191955" src="https://github.com/user-attachments/assets/e216212d-a081-4452-9430-6ce938701d9e" />
+<img width="1920" height="1020" alt="Screenshot 2025-11-02 192012" src="https://github.com/user-attachments/assets/639649db-6170-4c6a-a507-e6066b167975" />
+<img width="1920" height="1020" alt="Screenshot 2025-11-02 192335" src="https://github.com/user-attachments/assets/347b8921-b440-4ccc-8ddb-99fb863bb3fb" />
+<img width="1920" height="1020" alt="Screenshot 2025-11-02 192437" src="https://github.com/user-attachments/assets/046b42c0-652b-4614-8f7d-2fbe40ce447d" />
+<img width="1920" height="1020" alt="Screenshot 2025-11-02 192537" src="https://github.com/user-attachments/assets/2ec40af9-2604-4711-a342-5da6e8812c94" />
+<img width="1920" height="1020" alt="Screenshot 2025-11-02 192757" src="https://github.com/user-attachments/assets/8c0f1c1c-95e3-4ffa-8770-90c65a27e481" />
+
+---
+
+## 🙌 Acknowledgment  
+Special thanks to [Rajneesh Gupta](https://github.com/0xrajneesh/) for the dataset and guidance.
+
+---
+
+## 🏁 Conclusion  
+This project helped me:  
+- Explore SSH monitoring through Splunk  
+- Detect anomalies and failed login spikes  
+- Investigate attacker IPs and visualize trends  
+
+---
+
+## 🔖 Tags  
+`#Splunk` `#CyberSecurity` `#SOC` `#SIEM` `#SSHLogs` `#ThreatDetection` `#BlueTeam` `#HandsOnLearning`
