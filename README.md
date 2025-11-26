@@ -8,10 +8,10 @@ Detect and analyze **SSH authentication** activity to identify brute-force attem
 ---
 
 ## 🧩 Lab Setup  
-- **Tool:** Splunk Enterprise  
-- **Dataset:** `ssh.log`  
-- **Host:** `kali`  
-- **Sourcetype:** `syslog`  
+- **Tool:** Splunk cloud  
+- **Dataset:** `ssh_log`  
+- **Host:** `linuxserver`  
+- **Sourcetype:** `_json`  
 
 ---
 
@@ -19,7 +19,7 @@ Detect and analyze **SSH authentication** activity to identify brute-force attem
 
 ### 🕵️ Retrieve all SSH logs  
 ```spl
-source="ssh.log" host="kali" sourcetype="syslog"
+source="ssh_logs.json" host="linuxserver" index="main" sourcetype="_json"
 ```
 
 ---
@@ -28,14 +28,8 @@ source="ssh.log" host="kali" sourcetype="syslog"
 
 ### 🔹 Identify Top Source IPs  
 ```spl
-source="ssh.log" host="kali" sourcetype="syslog"
-| top limit=10 src_ip
-```
-
-### 🔹 Successful vs Failed Login Attempts  
-```spl
-source="ssh.log" host="kali" sourcetype="syslog"
-| stats count by info
+source="ssh_logs.json" host="linuxserver" index="main" sourcetype="_json"
+| top limit=10 id.orig_h
 ```
 
 ---
