@@ -34,35 +34,34 @@ source="ssh_logs.json" host="linuxserver" index="main" sourcetype="_json"
 
 ---
 
-## ⚠️ Task 3: Anomaly Detection  
-
-### 🔹 Detect Unusual Login Spikes  
+## ⚠️ Task 3: Analyze Failed Login Attempts   
 ```spl
-source="ssh.log" host="kali" sourcetype="syslog"
-| timechart span=1h count
-```
-
-### 🔹 Search for Failed Login Attempts  
-```spl
-source="ssh.log" host="kali" sourcetype="syslog"
-| search info="failure"
-```
-
-### 🔹 Investigate Suspicious IP Addresses  
-```spl
-source="ssh.log" host="kali" sourcetype="syslog"
-| search src_ip="192.168.202.109"
+source="ssh_logs.json" host="linuxserver" index="main" sourcetype="_json" event_type="Failed SSH Login"
+| stats count by id.orig_h
+| sort -count
 ```
 
 ---
 
-## 👨‍💻 Task 4: Monitoring User Behavior  
-
-### 🔹 Identify Users with Multiple Failed Logins  
+## 👨‍💻 Task 4: Detect Multiple Failed Authentication Attempts (Brute Force)  
 ```spl
-source="ssh.log" host="kali" sourcetype="syslog"
-| search info="failure"
-| stats count by src_ip
+source="ssh_logs.json" host="linuxserver" index="main" sourcetype="_json" event_type="Multiple Failed Authentication Attempts"
+| stats count by id.orig_h,id.resp_h 
+| where count >= 5
+
+### 🔹 Detect repeated failures (e.g., more than 5 attempts).
+### 🔹 Trigger an alert when any IP attempts more than 5 logins within 10 minutes.
+
+```
+---
+
+## ⚠️ Task 5: Look for Failure → Success pattern
+```spl
+source="ssh_logs.json" host="linuxserver" index="main" sourcetype="_json" event_type="Successful SSH Login" id.orig_h=164.89.50.183
+| stats count by id.orig_h,id.resp_h
+| sort -count
+
+### 🔹 Compare successful logins against prior failed attempts (to detect compromised accounts).
 ```
 
 ---
