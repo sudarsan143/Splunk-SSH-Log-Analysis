@@ -43,14 +43,14 @@ source="ssh_logs.json" host="linuxserver" index="main" sourcetype="_json" event_
 
 ---
 
-## 👨‍💻 Task 4: Detect Multiple Failed Authentication Attempts (Brute Force)  
+## ⚠️ Task 4: Detect Multiple Failed Authentication Attempts (Brute Force) 
+
+### 🔹 Detect repeated failures (e.g., more than 5 attempts).
+### 🔹 Trigger an alert when any IP attempts more than 5 logins within 10 minutes. 
 ```spl
 source="ssh_logs.json" host="linuxserver" index="main" sourcetype="_json" event_type="Multiple Failed Authentication Attempts"
 | stats count by id.orig_h,id.resp_h 
 | where count >= 5
-
-### 🔹 Detect repeated failures (e.g., more than 5 attempts).
-### 🔹 Trigger an alert when any IP attempts more than 5 logins within 10 minutes.
 
 ```
 ---
