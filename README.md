@@ -74,22 +74,35 @@ source="ssh_logs.json" host="linuxserver" index="main" sourcetype="_json" event_
 
 ---
 
-## 🖼 Dashboard Screenshots  
+## 🖼 Dashboard Screenshots 
 
+![image alt](https://github.com/sudarsan143/Splunk-SSH-Log-Analysis/blob/c64cc500665d9b762b053bc59e815af4a5776b2c/Analyze%20Failed%20Login%20Attempts.png)
+![image alt](https://github.com/sudarsan143/Splunk-SSH-Log-Analysis/blob/c64cc500665d9b762b053bc59e815af4a5776b2c/Failed%20Login%20chart.png)
+![image alt](https://github.com/sudarsan143/Splunk-SSH-Log-Analysis/blob/c64cc500665d9b762b053bc59e815af4a5776b2c/Detect%20Multiple%20Failed%20Authentication%20Attempts%20(Brute%20Force).png)
+![image alt](https://github.com/sudarsan143/Splunk-SSH-Log-Analysis/blob/c64cc500665d9b762b053bc59e815af4a5776b2c/Failure%20%E2%86%92%20Success%20pattern.png)
+![image alt](https://github.com/sudarsan143/Splunk-SSH-Log-Analysis/blob/c64cc500665d9b762b053bc59e815af4a5776b2c/suspicious%20unauthenticated%20SSH%20connection%20attempts..png)
+![image alt](https://github.com/sudarsan143/Splunk-SSH-Log-Analysis/blob/c64cc500665d9b762b053bc59e815af4a5776b2c/splunk%20ssh_logs%20dashboard.png)
 
 
 ---
 
-## 🙌 Acknowledgment  
-Special thanks to [Rajneesh Gupta](https://github.com/0xrajneesh/) for the dataset and guidance.
+
 
 ---
 
 ## 🏁 Conclusion  
-This project helped me:  
-- Explore SSH monitoring through Splunk  
-- Detect anomalies and failed login spikes  
-- Investigate attacker IPs and visualize trends  
+This project enabled me to deepen my SOC analysis skills by:  
+- Performing comprehensive SSH authentication monitoring using Splunk 
+- Identifying brute-force patterns, anomalous login behaviors, and suspicious access attempts
+- Correlating successful logins with prior failures to uncover potential account compromise
+- Profiling attacker IPs through geo-enrichment and interpreting trends with dashboards and time-based visualizations 
+
+---
+---
+
+## 🏁 Final Thoughts  
+- This project strengthened my practical SOC workflow by simulating real-world SSH attack scenarios and investigating them through Splunk. From detecting brute-force attempts to analyzing authenticated sessions, the end-to-end process reinforced how SIEM data can reveal early signs of compromise. The dashboards, alerts, and correlation logic built during this project provide a strong foundation for continuous monitoring and rapid incident response in an enterprise environment.
+
 
 ---
 
