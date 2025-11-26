@@ -56,12 +56,12 @@ source="ssh_logs.json" host="linuxserver" index="main" sourcetype="_json" event_
 ---
 
 ## ⚠️ Task 5: Look for Failure → Success pattern
+
+### 🔹 Correlate successful logins with earlier failures to detect signs of credential misuse or compromise.  
 ```spl
 source="ssh_logs.json" host="linuxserver" index="main" sourcetype="_json" event_type="Successful SSH Login" id.orig_h=164.89.50.183
 | stats count by id.orig_h,id.resp_h
 | sort -count
-
-### 🔹 Compare successful logins against prior failed attempts (to detect compromised accounts).
 ```
 
 ---
