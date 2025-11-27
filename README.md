@@ -1,4 +1,4 @@
-# 🛡️ Splunk SSH Log Analyzer  
+# 🛡️ Splunk SSH Log Analysis
 
 This project demonstrates how a SOC Analyst uses Splunk to analyze **SSH authentication logs** for detecting suspicious activities such as failed logins, brute-force attempts, successful logins from unusual locations, and unauthenticated SSH connections. You’ll learn how to ingest JSON log data, extract key fields, run detection queries, visualize login trends, and configure alerts for high-risk behavior. The project includes step-by-step tasks for identifying failed attempts, multiple failed authentications, suspicious source IPs, and scanning-like behavior. This hands-on lab strengthens core SIEM skills and provides practical experience in threat detection, log analysis, and building dashboards in Splunk.
 ---
